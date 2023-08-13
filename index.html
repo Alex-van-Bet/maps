@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<div>
+  <p>
+    <button id="clear" class="clear">Clear</button>
+  </p>
+  <input id="address" class="address" type="text" size="150">
+  <p>
+    <button id="generate">Generate</button>
+  </p>
+  <input id="NewAddress" class="address" type="text" size="150">
+  <p class="link">
+    <a href="#" target="_blank" id="link">Open in new tab</a>
+  </p>
+</div>
+
+<div>
+  <b>lat:</b>
+  <input id="inputLat" type="text" size="10" value="0.000000">
+  <button id="copyLat" class="copy">Copy</button>
+</div>
+
+<div>
+  <b>lng:</b>
+  <input id="inputLng" type="text" size="10" value="0.000000">
+  <button id="copyLng" class="copy">Copy</button>
+</div>
+
+
+
+<script language="JavaScript">
+
+  let btnGenerate = document.getElementById("generate");
+  let btnCopyLat= document.getElementById("copyLat");
+  let btnCopyLng = document.getElementById("copyLng");
+  let btnClear = document.getElementById("clear");
+
+  btnGenerate.onclick = function() {
+    let str = document.getElementById("address").value;
+    let b = str.split('@')[1];
+    let a = b.split('z')[0];
+    let lat = +(a.split(',')[0]);
+    let lng = (+a.split(',')[1] + 0.002);
+    
+
+    if (str.includes('en&entry') === true) {
+      document.getElementById('NewAddress').value = str.replace('en&entry','ru&entry');
+      document.getElementById('link').href = str.replace('en&entry','ru&entry');
+    }
+    else {
+      document.getElementById('NewAddress').value = str.replace('ru&entry','en&entry');
+      document.getElementById('link').href = str.replace('ru&entry','en&entry');
+    }
+   
+    console.log(a);
+    document.getElementById('inputLat').value = lat.toFixed(6);
+    document.getElementById('inputLng').value = lng.toFixed(6);
+  }
+
+  btnCopyLat.onclick = function() {
+    document.getElementById("inputLat").select();    
+    document.execCommand("copy");
+  }
+
+  btnCopyLng.onclick = function() {
+    document.getElementById("inputLng").select();    
+    document.execCommand("copy");
+  }
+
+  btnClear.onclick = function() {
+    document.getElementById('address').value = "";
+    document.getElementById('inputLat').value = "0.000000";
+    document.getElementById('inputLng').value = "0.000000";
+    document.getElementById('NewAddress').value = '';
+    document.getElementById('link').href = '';
+  }
+</script>
+
+<style type="text/css">
+  body {
+    margin: 50px;
+  }
+
+  button, a {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    height: 80px;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 20px;
+  }
+
+  input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 28px;
+    border-radius: 20px;
+  }
+
+  .copy, a {
+    background: #6610f2;
+  }
+
+  .clear {
+    background: #f21010;
+  }
+
+  .address {
+    font-size: 18px;
+  }
+
+  a {
+    text-decoration:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 50%;
+  }
+
+  .link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+</body>
+</html>
