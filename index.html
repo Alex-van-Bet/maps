@@ -17,9 +17,34 @@
     <button id="generate">Generate</button>
   </p>
   <input id="NewAddress" class="address" type="text" size="150">
-  <p class="link">
-    <a href="#" target="_blank" id="link">Open in new tab</a>
-  </p>
+
+  <div class="lang">
+
+    <p class="link">
+      <a href="#" target="_blank" id="link_EN">English</a>
+    </p>
+    <p class="link">
+      <a href="#" target="_blank" id="link_RU">Russion</a>
+    </p>
+    <p class="link">
+      <a href="#" target="_blank" id="link_DE">German</a>
+    </p>
+    <p class="link">
+      <a href="#" target="_blank" id="link_ES">Spanish</a>
+    </p>
+    <p class="link">
+      <a href="#" target="_blank" id="link_FR">French</a>
+    </p>
+    <p class="link">
+      <a href="#" target="_blank" id="link_IT">Italian</a>
+    </p>
+    <p class="link">
+      <a href="#" target="_blank" id="link_PT">Portugese</a>
+    </p>
+    <p class="link">
+      <a href="#" target="_blank" id="link_TR">Turkish</a>
+    </p>
+  </div>
 </div>
 
 <div>
@@ -42,7 +67,7 @@
   let btnCopyLat= document.getElementById("copyLat");
   let btnCopyLng = document.getElementById("copyLng");
   let btnClear = document.getElementById("clear");
-
+  
   btnGenerate.onclick = function() {
     let str = document.getElementById("address").value;
     let b = str.split('@')[1];
@@ -51,14 +76,38 @@
     let lng = (+a.split(',')[1] + 0.002);
     
 
-    if (str.includes('en&entry') === true) {
-      document.getElementById('NewAddress').value = str.replace('en&entry','ru&entry');
-      document.getElementById('link').href = str.replace('en&entry','ru&entry');
-    }
-    else {
-      document.getElementById('NewAddress').value = str.replace('ru&entry','en&entry');
-      document.getElementById('link').href = str.replace('ru&entry','en&entry');
-    }
+    
+    document.getElementById('link_EN').href = str.replace(/\hl=.*/, "") +"hl=en&entry=ttu";
+    document.getElementById('link_RU').href = str.replace(/\hl=.*/, "") +"hl=ru&entry=ttu";
+    document.getElementById('link_DE').href = str.replace(/\hl=.*/, "") +"hl=de&entry=ttu";
+    document.getElementById('link_ES').href = str.replace(/\hl=.*/, "") +"hl=es&entry=ttu";
+    document.getElementById('link_FR').href = str.replace(/\hl=.*/, "") +"hl=fr&entry=ttu";
+    document.getElementById('link_IT').href = str.replace(/\hl=.*/, "") +"hl=it&entry=ttu";
+    document.getElementById('link_PT').href = str.replace(/\hl=.*/, "") +"hl=pt-PT&entry=ttu";
+    document.getElementById('link_TR').href = str.replace(/\hl=.*/, "") +"hl=tr&entry=ttu";
+
+  
+  function openLinkList(linkList) {
+  for(let i = 0; i < linkList.length; i++) {
+    let a = document.createElement("a");
+    a.href = linkList[i];
+    a.target="_blank"
+    a.click();
+  }
+};
+ 
+let linkList = [
+document.getElementById('link_EN').href = str.replace(/\hl=.*/, "") +"hl=en&entry=ttu",
+    document.getElementById('link_RU').href = str.replace(/\hl=.*/, "") +"hl=ru&entry=ttu",
+    document.getElementById('link_DE').href = str.replace(/\hl=.*/, "") +"hl=de&entry=ttu",
+    document.getElementById('link_ES').href = str.replace(/\hl=.*/, "") +"hl=es&entry=ttu",
+    document.getElementById('link_FR').href = str.replace(/\hl=.*/, "") +"hl=fr&entry=ttu",
+    document.getElementById('link_IT').href = str.replace(/\hl=.*/, "") +"hl=it&entry=ttu",
+    document.getElementById('link_PT').href = str.replace(/\hl=.*/, "") +"hl=pt-PT&entry=ttu",
+    document.getElementById('link_TR').href = str.replace(/\hl=.*/, "") +"hl=tr&entry=ttu"
+];
+ 
+openLinkList(linkList);
    
     console.log(a);
     document.getElementById('inputLat').value = lat.toFixed(6);
@@ -74,6 +123,8 @@
     document.getElementById("inputLng").select();    
     document.execCommand("copy");
   }
+
+  
 
   btnClear.onclick = function() {
     document.getElementById('address').value = "";
@@ -95,7 +146,7 @@
     outline: 0;
     background: #4CAF50;
     width: 100%;
-    height: 80px;
+    height: 60px;
     border: 0;
     padding: 15px;
     color: #FFFFFF;
@@ -136,14 +187,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80%;
     height: 50%;
   }
 
-  .link {
+  .lang {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
+    }
+
+  .lang > p {
+    width: 95px;
+  }
+
+  #NewAddress {
+    display: none;
   }
 </style>
 
